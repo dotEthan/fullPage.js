@@ -349,10 +349,9 @@
                 if(value){
                     setMouseWheelScrolling(true);
                     addTouchHandler();
-                }else if(
-                !options.scrollBar && options.autoScrolling) {
-                      setMouseWheelScrolling(false);
-                      removeTouchHandler();
+                }else if(!options.scrollBar && options.autoScrolling) {
+                    setMouseWheelScrolling(false);
+                    removeTouchHandler();
                 }
             }
         }
@@ -946,6 +945,9 @@
             addClass($('a', bullet), ACTIVE);
         }
 
+        /**
+        * Gets the name for screen readers for a section/slide navigation bullet.
+        */
         function getBulletLinkName(i, defaultName){
             return options.navigationTooltips[i]
                 || options.anchors[i]
@@ -1336,6 +1338,12 @@
         function MouseWheelHandler(e) {
             var curTime = new Date().getTime();
             var isNormalScroll = hasClass($(COMPLETELY_SEL)[0], NORMAL_SCROLL);
+
+            //is scroll allowed?
+            if (!isScrollAllowed.m.down && !isScrollAllowed.m.up) {
+                preventDefault(e);
+                return false;
+            }
 
             //autoscrolling and not zooming?
             if(options.autoScrolling && !controlPressed && !isNormalScroll){

@@ -2125,7 +2125,7 @@ if ( typeof module != 'undefined' && module.exports ) {
 
 
 /*!
-* Scrolloverflow 2.0.0 module for fullPage.js >= 3
+* Scrolloverflow 2.0.1 module for fullPage.js >= 3
 * https://github.com/alvarotrigo/fullPage.js
 * @license MIT licensed
 *
@@ -2525,7 +2525,9 @@ if ( typeof module != 'undefined' && module.exports ) {
 
                 //updating the wrappers height
                 fp_utils.css($(SCROLLABLE_SEL, element)[0], {'height': scrollHeight + 'px'});
-                fp_utils.css($(SCROLLABLE_SEL, element)[0].parentNode, {'height': scrollHeight + getPaddings(element) + 'px'});
+
+                var parentHeight = options.verticalCentered ? scrollHeight + getPaddings(element) : scrollHeight;
+                fp_utils.css($(SCROLLABLE_SEL, element)[0].parentNode, {'height': parentHeight + 'px'});
             },
 
             /**
